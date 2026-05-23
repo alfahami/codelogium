@@ -1,10 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContactBook {
 
     public static void main(String[] args) {
-        
+        List<Contact> contacts = new ArrayList<>();
+
+        Contact c1 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com");
+        Contact c2 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com");
+
+        addContact(c1, contacts);
+        addContact(c2, contacts);
+
+        listAllContacts(contacts);
     }
-    
-    class Contact {
+
+    private static boolean addContact(Contact contact, List<Contact> contacts) {
+        return contacts.add(contact);
+    }
+
+    private static void listAllContacts(List<Contact> contacts) {
+        for (Contact contact : contacts) {
+            System.out.println(contact.toString());
+        }
+    }
+
+    static class Contact {
         private String name;
         private String phone;
         private String email;
