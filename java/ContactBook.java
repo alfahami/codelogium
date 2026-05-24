@@ -7,7 +7,7 @@ public class ContactBook {
         HashMap<String, Contact> contacts = new HashMap<>();
 
         Contact c1 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com");
-        Contact c2 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com");
+        Contact c2 = new Contact("TuPac", "0627528394", "tupac.shakur@gmail.com");
         Contact c3 = new Contact("Biggie", "0606215094", "biggie.notorius@gmail.com");
         Contact c4 = new Contact("Nate Dogg", "0650215032", "nate.big@gmail.com");
 
@@ -20,7 +20,7 @@ public class ContactBook {
 
         Contact retrievdContact = searchByName("Biggie", contacts);
 
-        System.out.println(retrievdContact);
+        System.out.println("Retrieve Contact from search by name: " + retrievdContact);
 
         removeContact("biggie", contacts);
 
@@ -34,11 +34,23 @@ public class ContactBook {
     }
 
     private static Contact searchByName(String name, HashMap<String, Contact> contacts) {
-        return contacts.get(name);
+        Contact contact = contacts.get(name);
+        if(contact == null) {
+            System.out.println("Contact : "+ name + " not found");
+            return null;
+        }
+        else return contact;
     }
 
     private static Contact removeContact(String name, HashMap<String, Contact> contacts) {
-        return contacts.remove(name);
+        Contact contact = contacts.remove(name);
+        if(contact != null) {
+            System.out.println("Contact " + name + " removed succesfully!");
+            return contact;
+        } else {
+            System.out.println("Contact " + name + " is not found!");
+            return null;
+        }
     }
 
     private static void listAllContacts(HashMap<String, Contact> contacts) {
