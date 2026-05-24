@@ -1,20 +1,25 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ContactBook {
 
     public static void main(String[] args) {
 
         HashMap<String, Contact> contacts = new HashMap<>();
+        HashMap<String, List<Contact>> contactByGroup = new HashMap<>();
 
-        Contact c1 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com");
-        Contact c2 = new Contact("TuPac", "0627528394", "tupac.shakur@gmail.com");
-        Contact c3 = new Contact("Biggie", "0606215094", "biggie.notorius@gmail.com");
-        Contact c4 = new Contact("Nate Dogg", "0650215032", "nate.big@gmail.com");
+        Contact c1 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com", "Rapper");
+        Contact c2 = new Contact("TuPac", "0627528394", "tupac.shakur@gmail.com", "Rapper");
+        Contact c3 = new Contact("Biggie", "0606215094", "biggie.notorius@gmail.com", "Rapper");
+        Contact c4 = new Contact("Nate Dogg", "0650215032", "nate.big@gmail.com", "Rapper");
+        Contact c5 = new Contact("Brad Traversy", "0534213456", "brad.traversy@gmail.com", "Tech Guy");
 
         addContact(c1, contacts);
         addContact(c2, contacts);
         addContact(c3, contacts);
         addContact(c4, contacts);
+        addContact(c5, contacts);
 
         listAllContacts(contacts);
 
@@ -25,6 +30,8 @@ public class ContactBook {
         removeContact("biggie", contacts);
 
         listAllContacts(contacts);
+        contactByGroup = groupByContacts("Rapper", contacts);
+        listAllGroupedContacts(contactByGroup);
     }
 
     private static Contact addContact(Contact contact, HashMap<String, Contact> contacts) {
@@ -53,9 +60,40 @@ public class ContactBook {
         }
     }
 
+    private static HashMap<String, List<Contact>> groupByContacts(String category, HashMap<String, Contact> contactHashMap) {
+        HashMap<String, List<Contact>> groupedContacts = new HashMap<>();
+        List<Contact> contactList = new ArrayList<>();
+        
+        for(String key : contactHashMap.keySet()) {
+            Contact retrievedContact = contactHashMap.get(key);
+            if(retrievedContact.getCategory().equalsIgnoreCase(category)) {
+                contactList.add(retrievedContact);
+            }
+        }
+
+        if(contactList != null && !contactList.isEmpty()) groupedContacts.put(category, contactList);
+        else System.out.println("Category doesn't exist");
+
+        return groupedContacts;
+    }
+
     private static void listAllContacts(HashMap<String, Contact> contacts) {
         for (String key : contacts.keySet()) {
             System.out.println(contacts.get(key).toString());
+        }
+    }
+
+    private static void listAllGroupedContacts(HashMap<String, List<Contact>> contacts) {
+        List<Contact> groupedContacts = new ArrayList<>();
+        for(String key : contacts.keySet()) {
+            groupedContacts = contacts.get(key);
+        }
+
+        if(groupedContacts != null) {
+            System.out.println("\nContacts By Group:");
+            for (Contact contact : groupedContacts) {
+                System.out.println(contact.toString());
+            }
         }
     }
 
