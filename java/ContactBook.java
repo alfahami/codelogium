@@ -3,8 +3,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ContactBook {
-     private HashMap<String, Contact> contacts = new HashMap<>();
-     private HashMap<String, List<Contact>> contactByGroup = new HashMap<>();
+    private HashMap<String, Contact> contacts = new HashMap<>();
+    private HashMap<String, List<Contact>> contactByGroup = new HashMap<>();
 
     public Contact addContact(Contact contact) {
         if(contacts.put(contact.getName().toUpperCase(), contact) == null) 
@@ -32,10 +32,8 @@ public class ContactBook {
         }
     }
 
-    public HashMap<String, List<Contact>> groupByContacts(String category) {
-        HashMap<String, List<Contact>> groupedContacts = new HashMap<>();
+    public HashMap<String, List<Contact>> groupByContacts(String category) {        
         List<Contact> contactList = new ArrayList<>();
-        
         for(String key : contacts.keySet()) {
             Contact retrievedContact = contacts.get(key);
             if(retrievedContact.getCategory().equalsIgnoreCase(category)) {
@@ -43,10 +41,10 @@ public class ContactBook {
             }
         }
 
-        if(contactList != null && !contactList.isEmpty()) groupedContacts.put(category, contactList);
+        if(contactList != null && !contactList.isEmpty()) contactByGroup.put(category, contactList);
         else System.out.println("Category doesn't exist");
 
-        return groupedContacts;
+        return contactByGroup;
     }
 
     public void listAllContacts() {
@@ -57,7 +55,7 @@ public class ContactBook {
 
     public void listAllGroupedContacts() {
         List<Contact> groupedContacts = new ArrayList<>();
-        for(String key : contacts.keySet()) {
+        for(String key : contactByGroup.keySet()) {
             groupedContacts = contactByGroup.get(key);
         }
 
@@ -67,7 +65,5 @@ public class ContactBook {
                 System.out.println(contact.toString());
             }
         }
-    }
-
-    
+    }  
 }
