@@ -28,13 +28,13 @@ public class ContactBook {
     }
 
     private static Contact addContact(Contact contact, HashMap<String, Contact> contacts) {
-        if(contacts.put(contact.getName(), contact) == null) 
+        if(contacts.put(contact.getName().toUpperCase(), contact) == null) 
             return contact;
          else return null;
     }
 
     private static Contact searchByName(String name, HashMap<String, Contact> contacts) {
-        Contact contact = contacts.get(name);
+        Contact contact = contacts.get(name.toUpperCase());
         if(contact == null) {
             System.out.println("Contact : "+ name + " not found");
             return null;
@@ -43,7 +43,7 @@ public class ContactBook {
     }
 
     private static Contact removeContact(String name, HashMap<String, Contact> contacts) {
-        Contact contact = contacts.remove(name);
+        Contact contact = contacts.remove(name.toUpperCase());
         if(contact != null) {
             System.out.println("Contact " + name + " removed succesfully!");
             return contact;
