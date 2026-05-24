@@ -9,14 +9,20 @@ public class ContactBook {
         Contact c1 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com");
         Contact c2 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com");
         Contact c3 = new Contact("Biggie", "0606215094", "biggie.notorius@gmail.com");
+        Contact c4 = new Contact("Nate Dogg", "0650215032", "nate.big@gmail.com");
 
         addContact(c1, contacts);
         addContact(c2, contacts);
         addContact(c3, contacts);
+        addContact(c4, contacts);
+
+        listAllContacts(contacts);
 
         Contact retrievdContact = searchByName("Biggie", contacts);
 
         System.out.println(retrievdContact);
+
+        removeContact("biggie", contacts);
 
         listAllContacts(contacts);
     }
@@ -29,6 +35,10 @@ public class ContactBook {
 
     private static Contact searchByName(String name, HashMap<String, Contact> contacts) {
         return contacts.get(name);
+    }
+
+    private static Contact removeContact(String name, HashMap<String, Contact> contacts) {
+        return contacts.remove(name);
     }
 
     private static void listAllContacts(HashMap<String, Contact> contacts) {
