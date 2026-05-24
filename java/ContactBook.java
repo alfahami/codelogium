@@ -8,9 +8,15 @@ public class ContactBook {
 
         Contact c1 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com");
         Contact c2 = new Contact("Tupac", "0627528394", "tupac.shakur@gmail.com");
+        Contact c3 = new Contact("Biggie", "0606215094", "biggie.notorius@gmail.com");
 
         addContact(c1, contacts);
         addContact(c2, contacts);
+        addContact(c3, contacts);
+
+        Contact retrievdContact = searchByName("Biggie", contacts);
+
+        System.out.println(retrievdContact);
 
         listAllContacts(contacts);
     }
@@ -19,6 +25,10 @@ public class ContactBook {
         if(contacts.put(contact.getName(), contact) == null) 
             return contact;
          else return null;
+    }
+
+    private static Contact searchByName(String name, HashMap<String, Contact> contacts) {
+        return contacts.get(name);
     }
 
     private static void listAllContacts(HashMap<String, Contact> contacts) {
